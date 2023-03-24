@@ -1,0 +1,21 @@
+trigger:
+  branches:
+    include: [main, feature/*, release/*, refs/tags/*]
+  paths:
+    include: [src/*]
+
+pool:
+  vmImage: ubuntu-latest
+
+resources:
+  repositories:
+    - repository: Asye
+      type: git
+      name: Architecture/Asye
+      ref: refs/heads/main
+
+extends:
+  template: src/dotnet/templates/nonstandard-library.yml@Asye
+  parameters:
+    gitStrategy: ScaledTbd
+    enableAST: False
